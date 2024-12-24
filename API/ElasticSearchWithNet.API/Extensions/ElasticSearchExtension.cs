@@ -1,5 +1,8 @@
 ﻿using Elastic.Clients.Elasticsearch;
 using Elastic.Transport;
+using ElasticSearchWithNet.API.Repositories;
+using ElasticSearchWithNet.API.Services;
+using System.Reflection;
 
 namespace ElasticSearchWithNet.API.Extensions
 {
@@ -17,6 +20,11 @@ namespace ElasticSearchWithNet.API.Extensions
             var client = new ElasticsearchClient(setting);
 
             Services.AddSingleton(client);
+
+            Services.AddScoped<ProductRepository>();
+            Services.AddScoped<ProductService>();
+
+            Services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
     }
 }
