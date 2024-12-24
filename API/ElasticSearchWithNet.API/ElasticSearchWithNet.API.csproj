@@ -16,4 +16,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Models\EColor.cs" />
+  </ItemGroup>
+
 </Project>
