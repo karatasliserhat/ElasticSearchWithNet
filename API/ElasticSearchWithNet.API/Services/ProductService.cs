@@ -35,5 +35,12 @@ namespace ElasticSearchWithNet.API.Services
             var response = await _repository.GetAllAsync();
             return ResponseDto<List<ResponseProductDto>>.Success(_mapper.Map<List<ResponseProductDto>>(response), HttpStatusCode.OK);
         }
+        public async Task<ResponseDto<ResponseProductDto>> GetByIdAsync(string id)
+        {
+            var result = _mapper.Map<ResponseProductDto>(await _repository.GetByIdAsync(id));
+
+            if (result is null) return ResponseDto<ResponseProductDto>.Fail("Ürün Bulunamaı", HttpStatusCode.NotFound);
+            return ResponseDto<ResponseProductDto>.Success(result, HttpStatusCode.OK);
+        }
     }
 }

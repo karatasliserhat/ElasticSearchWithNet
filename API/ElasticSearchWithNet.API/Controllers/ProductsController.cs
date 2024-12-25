@@ -23,5 +23,10 @@ namespace ElasticSearchWithNet.API.Controllers
         {
             return CreateActionResult(await _productService.GetAllProductAsync());
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            return CreateActionResult(await _productService.GetByIdAsync(id));
+        }
     }
 }
