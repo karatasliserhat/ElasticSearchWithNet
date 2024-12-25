@@ -24,6 +24,9 @@ namespace ElasticSearchWithNet.API.Extensions
             Services.AddScoped<ProductRepository>();
             Services.AddScoped<ProductService>();
 
+            Services.AddScoped<ECommerceRepository>();
+            Services.AddScoped<ECommerceService>();
+
             Services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
     }

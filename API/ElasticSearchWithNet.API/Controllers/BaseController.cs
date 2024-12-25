@@ -4,7 +4,7 @@ using System.Net;
 
 namespace ElasticSearchWithNet.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[Action]")]
     [ApiController]
     public class BaseController : ControllerBase
     {

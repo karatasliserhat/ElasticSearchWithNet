@@ -46,6 +46,7 @@ namespace ElasticSearchWithNet.API.Repositories
 
         public async Task<bool> UpdateAsync(Product product)
         {
+            //var response = await _client.UpdateAsync<Product, Product>(indexName, product.Id, x => x.Doc(product));
             var response = await _client.UpdateAsync<Product, Product>(product.Id, x => x.Index(indexName).Doc(product));
 
             return response.IsSuccess();
