@@ -50,5 +50,15 @@ namespace ElasticSearchWithNet.API.Repositories
 
             return response.IsSuccess();
         }
+        /// <summary>
+        /// Hata yönetimi için Bu metod ele alınmıştır.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<DeleteResponse> DeleteAsync(string id)
+        {
+            var response = await _client.DeleteAsync<Product>(id, x => x.Index(indexName));
+            return response;
+        }
     }
 }

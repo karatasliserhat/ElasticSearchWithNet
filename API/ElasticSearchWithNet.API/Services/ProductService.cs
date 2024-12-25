@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Elastic.Clients.Elasticsearch;
 using ElasticSearchWithNet.API.Dtos.ProductDtos;
 using ElasticSearchWithNet.API.Models;
 using ElasticSearchWithNet.API.Repositories;
@@ -50,6 +51,19 @@ namespace ElasticSearchWithNet.API.Services
             if (!result)
                 return ResponseDto<bool>.Fail("Update esnasında bir hata meydana geldi", HttpStatusCode.InternalServerError);
             return ResponseDto<bool>.Success(true, HttpStatusCode.NoContent);
+        }
+        public async Task<ResponseDto<bool>> DeleteAsync(string id)
+        {
+            var deleteResponse = await _repository.DeleteAsync(id);
+            if (!deleteResponse.IsValidResponse && deleteResponse.Result == Result.NotFound) return ResponseDto<bool>.Fail("Silmeye çalıştığınız ürün bulunamammıştır.", HttpStatusCode.NotFound);
+            if (!deleteResponse.IsValidResponse)
+            {
+                deleteResponse.TryGetOriginalException(out Exception? exception);
+                _logger.LogError(exception, deleteResponse.ElasticsearchServerError?.Error.ToString());
+                return ResponseDto<bool>.Fail("Silme işlemi esnasında bir hata meydana geldi", HttpStatusCode.InternalServerError);
+            }
+            return ResponseDto<bool>.Success(true, HttpStatusCode.NoContent);
+
         }
     }
 }
