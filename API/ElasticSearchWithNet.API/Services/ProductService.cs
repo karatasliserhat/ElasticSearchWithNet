@@ -42,5 +42,14 @@ namespace ElasticSearchWithNet.API.Services
             if (result is null) return ResponseDto<ResponseProductDto>.Fail("Ürün Bulunamaı", HttpStatusCode.NotFound);
             return ResponseDto<ResponseProductDto>.Success(result, HttpStatusCode.OK);
         }
+
+        public async Task<ResponseDto<bool>> UpdateAsync(UpdateProductDto updateProductDto)
+        {
+            var result = await _repository.UpdateAsync(_mapper.Map<Product>(updateProductDto));
+
+            if (!result)
+                return ResponseDto<bool>.Fail("Update esnasında bir hata meydana geldi", HttpStatusCode.InternalServerError);
+            return ResponseDto<bool>.Success(true, HttpStatusCode.NoContent);
+        }
     }
 }
