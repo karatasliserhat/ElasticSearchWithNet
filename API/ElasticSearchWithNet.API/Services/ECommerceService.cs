@@ -37,5 +37,10 @@ namespace ElasticSearchWithNet.API.Services
             var result = await _repository.RangeQuery(fromPrice,toPrice);
             return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
         }
+        public async Task<ResponseDto<List<ECommerce>>> MatchAllQuery()
+        {
+            var result = await _repository.MatchAllQuery();
+            return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
+        }
     }
 }

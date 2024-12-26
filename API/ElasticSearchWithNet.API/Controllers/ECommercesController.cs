@@ -33,5 +33,10 @@ namespace ElasticSearchWithNet.API.Controllers
         {
             return CreateActionResult(await _service.RangeQuery(fromPrice, toPrice));
         }
+        [HttpGet]
+        public async Task<IActionResult> MatchAllQuery()
+        {
+            return CreateActionResult(await _service.MatchAllQuery());
+        }
     }
 }
