@@ -15,31 +15,62 @@ namespace ElasticSearchWithNet.API.Services
             _repository = repository;
         }
 
-        public async Task<ResponseDto<List<ECommerce>>> TermQuery(string customerFullName)
+        public async Task<ResponseDto<List<ECommerce>>> TermQueryAsync(string customerFullName)
         {
-            var result = await _repository.TermQuery(customerFullName);
+            var result = await _repository.TermQueryAsync(customerFullName);
 
             return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
         }
-        public async Task<ResponseDto<List<ECommerce>>> TermsQuery(List<string> customerFirstNames)
+        public async Task<ResponseDto<List<ECommerce>>> TermsQueryAsync(List<string> customerFirstNames)
         {
-            var result = await _repository.TermsQuery(customerFirstNames);
+            var result = await _repository.TermsQueryAsync(customerFirstNames);
             return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
 
         }
-        public async Task<ResponseDto<List<ECommerce>>> PrefixQuery(string customerFullName)
+        public async Task<ResponseDto<List<ECommerce>>> PrefixQueryAsync(string customerFullName)
         {
-            var result = await _repository.PrefixQuery(customerFullName);
+            var result = await _repository.PrefixQueryAsync(customerFullName);
             return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
         }
-        public async Task<ResponseDto<List<ECommerce>>> RangeQuery(double fromPrice, double toPrice)
+        public async Task<ResponseDto<List<ECommerce>>> RangeQueryAsync(double fromPrice, double toPrice)
         {
-            var result = await _repository.RangeQuery(fromPrice,toPrice);
+            var result = await _repository.RangeQueryAsync(fromPrice,toPrice);
             return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
         }
-        public async Task<ResponseDto<List<ECommerce>>> MatchAllQuery()
+        public async Task<ResponseDto<List<ECommerce>>> MatchAllQueryAsync()
         {
-            var result = await _repository.MatchAllQuery();
+            var result = await _repository.MatchAllQueryAsync();
+            return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
+        }
+        public async Task<ResponseDto<List<ECommerce>>> PaginationQueryAsync(int page, int pageSize)
+        {
+            var result = await _repository.PaginationQueryAsync(page,pageSize);
+            return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
+        }
+        public async Task<ResponseDto<List<ECommerce>>> WildcardQueryAsync(string customerFullName)
+        {
+            var result = await _repository.WildcardQueryAsync(customerFullName);
+            return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
+        }
+        public async Task<ResponseDto<List<ECommerce>>> FuzzyQueryAsync(string customerFullName)
+        {
+            var result = await _repository.FuzzyQueryAsync(customerFullName);
+            return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
+
+        }
+        public async Task<ResponseDto<List<ECommerce>>> MatchQueryTextFullAsync(string category)
+        {
+            var result = await _repository.MatchQueryTextFullAsync(category);
+            return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
+        }
+        public async Task<ResponseDto<List<ECommerce>>> MatchBoolPrefixQueryTextFullAsync(string customerFullName)
+        {
+            var result = await _repository.MatchBoolPrefixQueryTextFullAsync(customerFullName);
+            return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
+        }
+        public async Task<ResponseDto<List<ECommerce>>> MatchPhraseQueryTextFullAsync(string customerFullName)
+        {
+            var result = await _repository.MatchPhraseQueryTextFullAsync(customerFullName);
             return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
         }
     }
