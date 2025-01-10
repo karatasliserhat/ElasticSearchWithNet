@@ -34,7 +34,7 @@ namespace ElasticSearchWithNet.API.Services
         }
         public async Task<ResponseDto<List<ECommerce>>> RangeQueryAsync(double fromPrice, double toPrice)
         {
-            var result = await _repository.RangeQueryAsync(fromPrice,toPrice);
+            var result = await _repository.RangeQueryAsync(fromPrice, toPrice);
             return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
         }
         public async Task<ResponseDto<List<ECommerce>>> MatchAllQueryAsync()
@@ -44,7 +44,7 @@ namespace ElasticSearchWithNet.API.Services
         }
         public async Task<ResponseDto<List<ECommerce>>> PaginationQueryAsync(int page, int pageSize)
         {
-            var result = await _repository.PaginationQueryAsync(page,pageSize);
+            var result = await _repository.PaginationQueryAsync(page, pageSize);
             return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
         }
         public async Task<ResponseDto<List<ECommerce>>> WildcardQueryAsync(string customerFullName)
@@ -63,6 +63,12 @@ namespace ElasticSearchWithNet.API.Services
             var result = await _repository.MatchQueryTextFullAsync(category);
             return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
         }
+
+        public async Task<ResponseDto<List<ECommerce>>> MultiMatchQueryTextFullAsync(string name)
+        {
+            var response = await _repository.MultiMatchQueryTextFullAsync(name);
+            return ResponseDto<List<ECommerce>>.Success(response.ToList(), HttpStatusCode.OK);
+        }
         public async Task<ResponseDto<List<ECommerce>>> MatchBoolPrefixQueryTextFullAsync(string customerFullName)
         {
             var result = await _repository.MatchBoolPrefixQueryTextFullAsync(customerFullName);
@@ -71,6 +77,18 @@ namespace ElasticSearchWithNet.API.Services
         public async Task<ResponseDto<List<ECommerce>>> MatchPhraseQueryTextFullAsync(string customerFullName)
         {
             var result = await _repository.MatchPhraseQueryTextFullAsync(customerFullName);
+            return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
+        }
+
+        public async Task<ResponseDto<List<ECommerce>>> CompoundQueryExampleOneAsync(string cityName, double taxFulTotalPrice, string categoryName, string manufacture)
+        {
+            var result = await _repository.CompoundQueryExampleOneAsync(cityName, taxFulTotalPrice, categoryName, manufacture);
+            return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
+        }
+
+        public async Task<ResponseDto<List<ECommerce>>> CompoundQueryExampleTwoAsync(string customerFullName)
+        {
+            var result = await _repository.CompoundQueryExampleTwoAsync(customerFullName);
             return ResponseDto<List<ECommerce>>.Success(result.ToList(), HttpStatusCode.OK);
         }
     }

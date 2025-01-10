@@ -39,7 +39,7 @@ namespace ElasticSearchWithNet.API.Controllers
             return CreateActionResult(await _service.MatchAllQueryAsync());
         }
         [HttpGet("{page}/{pageSize}")]
-        public async Task<IActionResult> PaginationQuery(int page=1, int pageSize=3)
+        public async Task<IActionResult> PaginationQuery(int page = 1, int pageSize = 3)
         {
             return CreateActionResult(await _service.PaginationQueryAsync(page, pageSize));
         }
@@ -64,13 +64,31 @@ namespace ElasticSearchWithNet.API.Controllers
         {
             return CreateActionResult(await _service.MatchBoolPrefixQueryTextFullAsync(customerFullName));
         }
-        
+
         [HttpGet("{customerFullName}")]
         public async Task<IActionResult> MatchPhraseQueryTextFull(string customerFullName)
         {
             return CreateActionResult(await _service.MatchPhraseQueryTextFullAsync(customerFullName));
         }
 
-        
+        [HttpGet("{cityName}/{taxFulTotalPrice}/{categoryName}/{manufacture}")]
+
+        public async Task<IActionResult> CompoundQueryExampleOne(string cityName, double taxFulTotalPrice, string categoryName, string manufacture)
+        {
+            return CreateActionResult(await _service.CompoundQueryExampleOneAsync(cityName, taxFulTotalPrice, categoryName, manufacture));
+        }
+
+        [HttpGet("{customerFullName}")]
+
+        public async Task<IActionResult> CompoundQueryExampleTwo(string customerFullName)
+        {
+            return CreateActionResult(await _service.CompoundQueryExampleTwoAsync(customerFullName));
+        }
+        [HttpGet]
+        public async Task<IActionResult> MultiMatchFullTextQuery(string name)
+        {
+            return CreateActionResult(await _service.MultiMatchQueryTextFullAsync(name));
+            return CreateActionResult(await _service.MultiMatchQueryTextFullAsync(name));
+        }
     }
 }
