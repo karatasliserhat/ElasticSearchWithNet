@@ -1,0 +1,51 @@
+﻿@model List<ResultBlogViewModel>
+@{
+    ViewData["Title"] = "Save";
+}
+
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <h2>Blog Search</h2>
+
+        @if (TempData["result"] is not null)
+        {
+            <div class="alert alert-warning">
+                @TempData["result"]
+            </div>
+        }
+        <form action="Search" method="post">
+            <div class="mb-3">
+                <label class="form-label">Search Text</label>
+                <input name="searchText" class="form-control">
+            </div>
+        </form>
+
+        <div class="mb-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>Title</td>
+                        <td>Content</td>
+                        <td>Tags</td>
+                        <td>Created</td>
+                        <td>UserId</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Title</td>
+                            <td>@item.Content</td>
+                            <td>@string.Join(",", item.Tags)</td>
+                            <td>@item.Created.ToShortDateString()</td>
+                            <td>@item.UserId</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
