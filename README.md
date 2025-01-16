@@ -2,8 +2,8 @@
 <h3>Neler Öğredim</h3>
 <p>Elasticsearch Temelleri: Elasticsearch'in ne olduğunu, nasıl çalıştığını ve özelliklerini</p>
 <p>Veri Yönetimi: Elasticsearch ile verileri nasıl güncelleyebileceğimi, silebileceğimi ve yönetebileceğimi</p>
-<p>Sorgular: Elasticsearch ile sorgu yapmayı ve arama sorgularını nasıl yapılandıracağınızı</p>
-<p>.Net Core projelerinizde NEST kütüphanesi kullanmayı</p>
+<p>Sorgular: Elasticsearch ile sorgu yapmayı ve arama sorgularını nasıl yapılandıracağımı</p>
+<p>.Net Core projelerinde NEST kütüphanesi kullanmayı</p>
 
 
 <h3> Detaylar</h3>
