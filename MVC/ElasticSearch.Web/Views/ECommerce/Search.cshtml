@@ -1,0 +1,94 @@
+﻿@model SearchEcommerceDataViewModel
+@{
+    ViewData["Title"] = "Save";
+}
+
+<div class="container">
+    <div class="row">
+        <h2>Ecommerce Search</h2>
+
+        <div class="col-md-3">
+            <form action="Search" method="get">
+                <div class="mb-3">
+                    <label class="form-label" asp-for="SearchViewModel.CustomerFullName"></label>
+                    <input asp-for="SearchViewModel.CustomerFullName" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="SearchViewModel.Category"></label>
+                    <input asp-for="SearchViewModel.Category" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="SearchViewModel.Gender"></label>
+                    <input asp-for="SearchViewModel.Gender" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="SearchViewModel.OrderDateStart"></label>
+                    <input type="date" asp-for="SearchViewModel.OrderDateStart" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" asp-for="SearchViewModel.OrderDateEnd"></label>
+                    <input type="date" asp-for="SearchViewModel.OrderDateEnd" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-9">
+            <div class="alert alert-success">
+                Toplam @Model.TotalCount kayıt bulunmuştur.
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>CustomerFullName</td>
+                        <td>Customer First Name</td>
+                        <td>Customer LastName</td>
+                        <td>Gender</td>
+                        <td>Category</td>
+                        <td>OrderDate</td>
+                        <td>TaxFullPrice</td>
+                        <td>Id</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ECommerceList)
+                    {
+                        <tr>
+                            <td>@item.CustomerFullName</td>
+                            <td>@item.CustomerFirstName</td>
+                            <td>@item.CustomerLastName</td>
+                            <td>@item.Gender</td>
+                            <td>@item.Categories</td>
+                            <td>@item.OrderDate.ToShortDateString()</td>
+                            <td>@item.TaxFulTotalPrice</td>
+                            <td>@item.Id</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="mb-3">
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item">
+
+                            <a class="page-link" href="@Model.CurrentUrl(Context.Request,1,Model.PageSize)">First</a>
+                        </li>
+                        @for (int i = Model.StartPage(); i <= Model.EndPage(); i++)
+                        {
+                            <li class="page-item @(Model.Page==i?"active":"")">
+
+                                <a class="page-link" href="@Model.CurrentUrl(Context.Request,i,Model.PageSize)">@i</a>
+                            </li>
+                        }
+                        <li class="page-item">
+
+                            <a class="page-link" href="@Model.CurrentUrl(Context.Request,Model.PageLinkCount,Model.PageSize)">Last</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+

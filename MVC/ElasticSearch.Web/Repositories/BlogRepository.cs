@@ -38,6 +38,7 @@ namespace ElasticSearch.Web.Repositories
 
             if (string.IsNullOrEmpty(searchText))
                 actions.Add(matAllQuery);
+
             else
             {
                 actions.Add(matcQueryContent);

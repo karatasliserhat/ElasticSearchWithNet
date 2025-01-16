@@ -23,6 +23,8 @@ namespace ElasticSearch.Web.Extensions
 
             Services.AddScoped<BlogRepository>();
             Services.AddScoped<BlogService>();
+            Services.AddScoped<ECommerceRepository>();
+            Services.AddScoped<ECommerceService>();
 
 
             Services.AddAutoMapper(Assembly.GetExecutingAssembly());

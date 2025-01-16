@@ -13,6 +13,8 @@ namespace ElasticSearch.Web.Mappings
                 .ReverseMap();
             CreateMap<Blog, UpdateBlogViewModel>().ReverseMap();
             CreateMap<Blog, ResultBlogViewModel>().ReverseMap();
+
+            CreateMap<ECommerce, ECommerceViewModel>().ReverseMap();
         }
     }
 }
